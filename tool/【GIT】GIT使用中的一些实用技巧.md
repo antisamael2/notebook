@@ -1,5 +1,6 @@
+# 【GIT】GIT使用中的一些实用技巧
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
@@ -20,9 +21,6 @@
     - [汇合分支的提交然后合并到指定分支](#汇合分支的提交然后合并到指定分支)
 
 <!-- /code_chunk_output -->
-# 【GIT】GIT使用中的一些实用技巧
-
-TODO: 逗号要改下
 
 ## 关于 HEAD
 
@@ -178,7 +176,7 @@ TODO: 没看懂建议...
 
 ### 提取提交 cherry-pick
 
-如果我代码的修改上错了分支，或者想将分支的修改导入到另一个分支，可以使用 *cherry-pick* 
+如果我代码的修改上错了分支，或者想将分支的修改导入到另一个分支，可以使用 *cherry-pick*
 比如我想将某个分支上的 提交 1ab2 导入到  master
 
 ```shell
@@ -203,6 +201,7 @@ git merge --squash fix
 git commit . -m "合并fix分支上的所有提交到master分支"
 ```
 
-参考:
-https://backlog.com/git-tutorial/cn/reference/
-https://blog.csdn.net/qq_32452623/article/details/79599503
+## 参考
+
+[猴子都能懂的GIT入门](https://backlog.com/git-tutorial/cn/reference)
+[Git - 叹为观止的 log 命令 & 其参数](https://blog.csdn.net/qq_32452623/article/details/79599503)
