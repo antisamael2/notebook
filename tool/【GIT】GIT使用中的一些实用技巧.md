@@ -1,32 +1,30 @@
+# 【GIT】GIT使用中的一些实用技巧
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [【GIT】GIT使用中的一些实用技巧](#gitgit使用中的一些实用技巧)
-  - [关于 HEAD](#关于-head)
-  - [我只想看看远端的代码长什么样子了 fetch](#我只想看看远端的代码长什么样子了-fetch)
-  - [菠萝菠萝蜜](#菠萝菠萝蜜)
-    - [回退代码 revert 和 reset](#回退代码-revert-和-reset)
-  - [提交时的“骚”操作](#提交时的骚操作)
-    - [改写最后一次提交 commit --amend](#改写最后一次提交-commit-amend)
-    - [汇合提交 rebase -i](#汇合提交-rebase-i)
-    - [修改提交 rebase -i](#修改提交-rebase-i)
-  - [玩转分支](#玩转分支)
-    - [合并分支 merge 和 rebase](#合并分支-merge-和-rebase)
-      - [merge](#merge)
-      - [rebase](#rebase)
-    - [提取提交 cherry-pick](#提取提交-cherry-pick)
-    - [汇合分支的提交然后合并到指定分支](#汇合分支的提交然后合并到指定分支)
+- [关于 HEAD](#关于-head)
+- [我只想看看远端的代码长什么样子了 fetch](#我只想看看远端的代码长什么样子了-fetch)
+- [菠萝菠萝蜜](#菠萝菠萝蜜)
+  - [回退代码 revert 和 reset](#回退代码-revert-和-reset)
+- [提交时的“骚”操作](#提交时的骚操作)
+  - [改写最后一次提交 commit --amend](#改写最后一次提交-commit-amend)
+  - [汇合提交 rebase -i](#汇合提交-rebase-i)
+  - [修改提交 rebase -i](#修改提交-rebase-i)
+- [玩转分支](#玩转分支)
+  - [合并分支 merge 和 rebase](#合并分支-merge-和-rebase)
+    - [merge](#merge)
+    - [rebase](#rebase)
+  - [提取提交 cherry-pick](#提取提交-cherry-pick)
+  - [汇合分支的提交然后合并到指定分支](#汇合分支的提交然后合并到指定分支)
+- [参考](#参考)
 
 <!-- /code_chunk_output -->
-# 【GIT】GIT使用中的一些实用技巧
-
-TODO: 逗号要改下
 
 ## 关于 HEAD
 
-*HEAD~~* 或 *HEAD~2* 前两次修改
+*HEAD~~* 或 *HEAD~2* 表示前两次修改
 
 ## 我只想看看远端的代码长什么样子了 fetch
 
@@ -58,8 +56,8 @@ git reset --hard ORIG_HEAD
 
 TODO: 我可以指定 revert 任意一次提交吗? revert的内容是仅那次提交的修改，还是那次提交之后所有的修改？
 
-**问：** 对于已经发布的提交，reset后是如何在MR中体现的?
-**答：** reset 后再 commit，MR只保留reset后的 commit
+**问：** 对于已经发布的提交，reset后是如何在MR中体现的?  
+**答：** reset 后再 commit，MR只保留reset后的 commit  
 
 ## 提交时的“骚”操作
 
@@ -80,33 +78,33 @@ git commit --amend
 git rebase -i HEAD~~
 ```
 
-然后会打开一个文本编辑器，会显示 HEAD 到 HEAD~~ 的提交
-将 HEAD commit 前面的 pick 改成 squash
-保存退出
-然后会自动合并后提交，接着会显示提交信息的编辑器，编辑信息后保存退出
-这样两个提交就汇合成一个提交了
+然后会打开一个文本编辑器，会显示 HEAD 到 HEAD~~ 的提交  
+将 HEAD commit 前面的 pick 改成 squash  
+保存退出  
+然后会自动合并后提交，接着会显示提交信息的编辑器，编辑信息后保存退出  
+这样两个提交就汇合成一个提交了  
 
 ### 修改提交 rebase -i
 
-前面的 commit --amend 只能修改最后一次提交，但是使用 rebase -i 我们可以修改任意一次提交!
-首先选择要修改的提交，比如前两次的提交
+前面的 commit --amend 只能修改最后一次提交，但是使用 rebase -i 我们可以修改任意一次提交!  
+首先选择要修改的提交，比如前两次的提交  
 
 ```shell
 git rebase -i HEAD~~
 ```
 
-然后将第一行的 pick 改成 eidt，保存退出
-这个时候修改过的提交会呈现退出状态
-然后打开要修改的文件，编辑
-再用
+然后将第一行的 pick 改成 eidt，保存退出  
+这个时候修改过的提交会呈现退出状态  
+然后打开要修改的文件，编辑  
+再用  
 
 ```shell
 git add .
 git commit --amend
 ```
 
-保存修改
-要改的提交都改完了的话，执行
+保存修改  
+要改的提交都改完了的话，执行  
 
 ```shell
 git rebase --continue
@@ -124,9 +122,9 @@ git reset --hard ORIG_HEAD
 
 ### 合并分支 merge 和 rebase
 
-*merge* 和 *rebase* 都可以合并分支的代码，主要差异在于合并后的历史纪录
-个人比较喜欢 *rebase* ，生成的历史纪录更简洁易懂
-比如说有两个分支 master 和 fix
+*merge* 和 *rebase* 都可以合并分支的代码，主要差异在于合并后的历史纪录  
+个人比较喜欢 *rebase* ，生成的历史纪录更简洁易懂  
+比如说有两个分支 master 和 fix  
 
 #### merge
 
@@ -178,7 +176,7 @@ TODO: 没看懂建议...
 
 ### 提取提交 cherry-pick
 
-如果我代码的修改上错了分支，或者想将分支的修改导入到另一个分支，可以使用 *cherry-pick* 
+如果我代码的修改上错了分支，或者想将分支的修改导入到另一个分支，可以使用 *cherry-pick*
 比如我想将某个分支上的 提交 1ab2 导入到  master
 
 ```shell
@@ -203,6 +201,7 @@ git merge --squash fix
 git commit . -m "合并fix分支上的所有提交到master分支"
 ```
 
-参考:
-https://backlog.com/git-tutorial/cn/reference/
-https://blog.csdn.net/qq_32452623/article/details/79599503
+## 参考
+
+[猴子都能懂的GIT入门](https://backlog.com/git-tutorial/cn/reference)  
+[Git - 叹为观止的 log 命令 & 其参数](https://blog.csdn.net/qq_32452623/article/details/79599503)
