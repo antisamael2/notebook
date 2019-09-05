@@ -18,6 +18,7 @@
     - [rebase](#rebase)
   - [提取提交 cherry-pick](#提取提交-cherry-pick)
   - [汇合分支的提交然后合并到指定分支](#汇合分支的提交然后合并到指定分支)
+- [查看日志](#查看日志)
 - [参考](#参考)
 
 <!-- /code_chunk_output -->
@@ -200,6 +201,16 @@ git merge --squash fix
 ```shell
 git commit . -m "合并fix分支上的所有提交到master分支"
 ```
+
+## 查看日志
+
+```shell
+git log --oneline --decorate --graph
+```
+
+–oneline 打印成一行  
+–graph 选项会绘制一个 ASCII 图像来展示提交历史的分支结构  
+–decorate 显示 HEAD 指针，分支名称，远程分支，标签等  
 
 ## 参考
 
